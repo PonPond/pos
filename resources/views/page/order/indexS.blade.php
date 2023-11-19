@@ -27,80 +27,23 @@
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 เวลาที่ขาย</th>
 
-                                <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
-                                    ใบเสร็จ
-                                </th>
+                        
                               
-                            <th>
+                                <th>
+                            
+
+                                </th>
+
                                 
-                            </th>
+                                <th>
+                            
+
+                                </th>
+                            
                         </tr>
                     </thead>
 
                     <tbody>
-
-
-                        @foreach ($list as $item)
-                       
-                        
-                       
-                            <tr>
-                                <td>
-                                  
-                                    <div class="d-flex px-2">
-                                        <div class="my-auto">
-                                            <b>
-                                                {{$item->slip_id}}
-                                            </b>
-
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    @if($item->type_sale == "ค้างชำระ")
-                                    <b style="color:rgb(238, 22, 22)">{{ $item->type_sale }}</b>
-                                    @elseif($item->type_sale == "โอนผ่านบัญชีธนาคาร")
-                                    <b style="color:rgb(38, 3, 233)">{{ $item->type_sale }}</b>
-                                    @elseif($item->type_sale == "เงินสด")
-                                    <b>{{ $item->type_sale }}</b>
-                                    
-                                    @endif
-
-                                    
-
-                                </td>
-                                <td>
-                                    <b>{{ $item->total_price }} บาท</b> 
-
-                                </td>
-                                <td>
-                                    <b>{{ $ThaiFormat->makeFormat($item->created_at) }}</b>
-
-                                </td>
-                                <td>
-                                         <a   href="{{ URL::to('generate-pdf2/' . $item->id) }}"
-                                        target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a>
-                                        <a   href="{{ URL::to('generate-a4/' . $item->id) }}"
-                                        target="_blank"  class="text-success" >  A4 <i class="fas fa-print"></i></a>
-
-
-
-                                </td>
-
-                                <td>
-                                    @if ( Auth::user()->role == 1 )
-                                
-                                
-
-                                    <a href="{{ url('/listall/delete/' . $item->id) }}"class="btn btn-secondary btn-sm bg-gradient-danger mb-3"
-                                        onclick="return confirm('ลบหรือไม่ ?')"> ลบข้อมูล</a>
-                                        @endif
-                                </td>
-                               
-                            </tr>
-                        @endforeach
-
 
                     </tbody>
                 </table>
@@ -110,16 +53,27 @@
     </div>
 
 
+    @push('scripts')
 
-    <script>
-        $(document).ready(function() {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
             $('#myTable').DataTable({
-                responsive: true,
-                paging: true,
-                lengthMenu: [10, 25, 50, 75, 100, 10000],
-                ordering: false,
-                info: false,
-
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('listindexs') }}",
+                columns: [
+            { data: 'slip_id', name: 'slip_id' },
+            { data: 'type_sale', name: 'type_sale' }, // New column for category name
+            { data: 'total_price', name: 'total_price' },
+            { data: 'created_at', name: 'created_at'},
+            { data: 'action', name: 'action', orderable: false, searchable: false },
+            
+            { data: 'action1', name: 'action1', orderable: false, searchable: false }
+                ],
+                deferRender: true,
+                serverSide: true,
+                processing: true,
                 "language": {
                     "search": "<b>ค้นหา</b>",
                     "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
@@ -133,6 +87,9 @@
                     }
                 }
             });
+          
+            
         });
     </script>
+@endpush
 @endsection

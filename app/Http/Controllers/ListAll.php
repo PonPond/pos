@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DataTables;
 use App\Models\Orders;
 use App\Models\Order_product;
 use App\Models\Product;
@@ -13,26 +13,107 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class ListAll extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $list = Orders::where('type',"ขายปลีก")->orderBy('id','desc')->get();
+         if ($request->ajax()) {
+ 
+            $data = DB::table('orders')
+            ->select('orders.*')
+            ->where('type', 'ขายปลีก')
+            ->orderByDesc('created_at');
+            
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $actionButtons = '<a href="' . url('/generate-pdf2/' . $data->id) . '" style="margin: 0%;" target="_blank" class="text-danger"> ออกใบเสร็จ <i class="fas fa-print"></i></a>';
+                
+                $actionButtons .= '<a href="' . url('/generate-a4/' . $data->id) . '" style="margin: 0%;" target="_blank" class="text-success"> A4 <i class="fas fa-print"></i></a>';
+            
+                return $actionButtons;
+            })
+            ->addColumn('action1', function ($data) {
+                // Define $actionButtons1 before appending to it
+                $actionButtons1 = '';
+            
+                if (Auth::user()->role == 1) {
+                    $actionButtons1 .= '<a href="' . url('/listall/delete/' . $data->id) . '" class="btn btn-secondary btn-sm bg-gradient-danger mb-3" onclick="return confirm(\'ลบหรือไม่ ?\')"> ลบข้อมูล</a>';
+                }   
+                
+                return $actionButtons1;
+            })
+            ->rawColumns(['action', 'action1'])
 
-        // $orders = DB::table('orders')
-        // ->orderBy('id', 'desc')
-        // ->first();
-
-        return view('page.order.index', compact('list'));
+            ->filter(function ($query) use ($request) {
+                if ($request->has('search') && !empty($request->search['value'])) {
+                    $searchValue = $request->search['value'];
+                    $searchTerms = explode(' ', $searchValue);
+                    
+                    $query->where(function($subquery) use ($searchTerms) {
+                        foreach ($searchTerms as $term) {
+                            $subquery->where(function($subquery) use ($term) {
+                                $subquery->where('slip_id', 'like', "%$term%");
+                                         
+                            });
+                        }
+                    });
+                }
+            })
+            ->make(true);
     }
 
-    public function indexS()
+        return view('page.order.index');
+    }
+
+    public function indexS(Request $request)
     {
-        $list = Orders::where('type',"ขายส่ง")->orderBy('id','desc')->get();
+        if ($request->ajax()) {
+ 
+            $data = DB::table('orders')
+            ->where('type', 'ขายส่ง')
+            ->select('orders.*')
+            ->orderByDesc('created_at');
+            
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $actionButtons = '<a href="' . url('/generate-pdf2/' . $data->id) . '" style="margin: 0%;" target="_blank" class="text-danger"> ออกใบเสร็จ <i class="fas fa-print"></i></a>';
+                
+                $actionButtons .= '<a href="' . url('/generate-a4/' . $data->id) . '" style="margin: 0%;" target="_blank" class="text-success"> A4 <i class="fas fa-print"></i></a>';
+            
+                return $actionButtons;
+            })
+            ->addColumn('action1', function ($data) {
+                // Define $actionButtons1 before appending to it
+                $actionButtons1 = '';
+            
+                if (Auth::user()->role == 1) {
+                    $actionButtons1 .= '<a href="' . url('/listall/delete/' . $data->id) . '" class="btn btn-secondary btn-sm bg-gradient-danger mb-3" onclick="return confirm(\'ลบหรือไม่ ?\')"> ลบข้อมูล</a>';
+                }   
+                
+                return $actionButtons1;
+            })
+            ->rawColumns(['action', 'action1'])
 
-        // $orders = DB::table('orders')
-        // ->orderBy('id', 'desc')
-        // ->first();
+            ->filter(function ($query) use ($request) {
+                if ($request->has('search') && !empty($request->search['value'])) {
+                    $searchValue = $request->search['value'];
+                    $searchTerms = explode(' ', $searchValue);
+                    
+                    $query->where(function($subquery) use ($searchTerms) {
+                        foreach ($searchTerms as $term) {
+                            $subquery->where(function($subquery) use ($term) {
+                                $subquery->where('slip_id', 'like', "%$term%");
+                                         
+                            });
+                        }
+                    });
+                }
+            })
+            ->make(true);
+    }
 
-        return view('page.order.indexS', compact('list'));
+
+        return view('page.order.indexS');
     }
 
 

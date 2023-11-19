@@ -100,6 +100,13 @@
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 เบอร์โทร
                             </th>
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                เลขบัตร
+                            </th>
+
+                            <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
+                                ที่อยู่
+                            </th>
 
                             {{-- <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">
                                 หนี้รวม
@@ -137,6 +144,21 @@
                                             </b>
 
                                 </td>
+
+                                <td>
+                                            <b>
+                                                {{ $item->email }}
+                                            </b>
+
+                                </td>
+
+                                <td>
+                                            <b>
+                                                {{ $item->address }}
+                                            </b>
+
+                                </td>
+
                                 {{-- <td>
                                     <b>
                                         {{ $item->total_debts }}
