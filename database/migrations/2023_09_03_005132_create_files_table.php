@@ -11,24 +11,5 @@ class CreateFilesTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        // Schema::create('files', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('filename');
-        //     $table->string('path');
-        //     $table->timestamps();
-        // });
-    }
     
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        // Schema::dropIfExists('files');
-    }
 }

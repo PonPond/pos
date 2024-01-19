@@ -167,7 +167,9 @@ class ListAll extends Controller
         $tableName->listcount = $request->quantity;
         $tableName->listprice = $request->price;
         $tableName->debtors_id = $request->debtors_id;
-        
+
+        $tableName->fix = $request->fix;
+        $tableName->fix_cost = $request->fix_cost;
         $tableName->save();
 
        

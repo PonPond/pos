@@ -16,7 +16,9 @@ class Orders extends Model
         'type_sale	',
         'amount',
         'change',
-        'type'
+        'type',
+        'fix',
+        'fix_cost'
     ];
     protected $casts = [
         'listall' => 'array',

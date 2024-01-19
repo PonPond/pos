@@ -74,6 +74,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
+       
+
         Schema::create('order_products', function (Blueprint $table) {
             $table->unsignedBigInteger('order_id');
             $table->string('product_id');
@@ -114,6 +116,13 @@ return new class extends Migration
         $table->timestamps();
         });
 
+          Schema::create('files', function (Blueprint $table) {
+            $table->id();
+            $table->string('filename');
+            $table->string('path');
+            $table->timestamps();
+        });
+
         
 
     }
@@ -133,6 +142,6 @@ return new class extends Migration
         Schema::dropIfExists('debts');
         Schema::dropIfExists('debtors');
         Schema::dropIfExists('refunds');
-    
+        Schema::dropIfExists('files');
     }
 };

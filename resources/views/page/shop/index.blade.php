@@ -45,58 +45,64 @@
                     <div class="table-responsive">
                         <table class="table align-items-center mb-0">
                             <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><b>วันที่ขาย</b></th>
-                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><b>ออกใบเสร็จ</b></th>
-                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><b>รหัสใบเสร็จ</b></th>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        <b>วันที่ขาย</b>
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        <b>ออกใบเสร็จ</b>
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        <b>รหัสใบเสร็จ</b>
+                                    </th>
 
 
 
-                            </tr>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($listall as $item)
+                                @foreach ($listall as $item)
+                                    <tr>
 
-                            <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    {{ $ThaiFormat->makeFormat($item->created_at) }}
 
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            {{ $ThaiFormat->makeFormat($item->created_at) }}
-                                            
-                                        </div>
-                                    </div>
-                                </td>
+                                                </div>
+                                            </div>
+                                        </td>
 
-                                <td>
+                                        <td>
 
-                                    <button type="button" class="btn btn-outline-info" onclick="printreceiptContent('print')">
-                                         <i class="fas fa-print"></i>
-                                    </button>
-                                    <div class="modal">
-                                        <div id="print">
-                                            @include('page.export.index')
-                                        </div>
-                                    </div>
+                                            <button type="button" class="btn btn-outline-info"
+                                                onclick="printreceiptContent('print')">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                            <div class="modal">
+                                                <div id="print">
+                                                    @include('page.export.index')
+                                                </div>
+                                            </div>
 
-                                    {{-- <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"
+                                            {{-- <a   href="{{ URL::to('generate-pdf/' . $item->id) }}"
                                         target="_blank"  class="text-danger" > ออกใบเสร็จ <i class="fas fa-print"></i></a> --}}
 
 
 
 
-                                </td>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            {{$item->total_price}}
-                                        </div>
-                                    </div>
-                                </td>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    {{ $item->total_price }}
+                                                </div>
+                                            </div>
+                                        </td>
 
 
-                            </tr>
-                            @endforeach
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -111,18 +117,16 @@
 
 
         @if (session('ok'))
-
             <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
-                <span class="alert-text">  <strong>สำเร็จ !</strong> เพิ่มรายการขายเรียบร้อย</span>
+                <span class="alert-text"> <strong>สำเร็จ !</strong> เพิ่มรายการขายเรียบร้อย</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         @endif
         @if (session('success'))
-
             <div class="alert alert-success alert-dismissible text-white fade show" role="alert">
-                <span class="alert-text">  <strong>สำเร็จ !</strong> เพิ่มสินค้าลงในรายการขายเรียบร้อย</span>
+                <span class="alert-text"> <strong>สำเร็จ !</strong> เพิ่มสินค้าลงในรายการขายเรียบร้อย</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -130,7 +134,7 @@
         @endif
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
-                <span class="alert-text">  <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล</span>
+                <span class="alert-text"> <strong>พบข้อผิดพลาด !</strong> ไม่พบสินค้าในฐานข้อมูล</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -138,7 +142,7 @@
         @endif
         @if (session('delete'))
             <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
-                <span class="alert-text">  <strong>สำเร็จ !</strong> ลบสินค้าออกจากรายการขายเรียบร้อย</span>
+                <span class="alert-text"> <strong>สำเร็จ !</strong> ลบสินค้าออกจากรายการขายเรียบร้อย</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -146,21 +150,21 @@
         @endif
         @if (session('update'))
             <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
-                <span class="alert-text">  <strong>สำเร็จ !</strong> อัพเดทจำนวนเรียบร้อย</span>
+                <span class="alert-text"> <strong>สำเร็จ !</strong> อัพเดทจำนวนเรียบร้อย</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         @endif
         @if (session('deleteall'))
-        <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
-            <span class="alert-text">  <strong>สำเร็จ !</strong> ลบข้อมูลทั้งหมดเรียบร้อย</span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-       
+            <div class="alert alert-warning alert-dismissible text-white fade show" role="alert">
+                <span class="alert-text"> <strong>สำเร็จ !</strong> ลบข้อมูลทั้งหมดเรียบร้อย</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
 
     </div>
 
@@ -183,28 +187,28 @@
                                 </th>
                                 <th class="text-uppercase text-secondary text-1xl font-weight-bolder opacity-7 ps-2">
                                     จำนวน</th>
-                                <th class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
+                                <th
+                                    class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
                                     ราคาต่อชิ้น</th>
-                                    <th class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
+                                <th
+                                    class="text-center text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">
                                     ราคารวม</th>
-                                     
+
 
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @php
-                                $index=0;
-                                    $i =1;
+                                $index = 0;
+                                $i = 1;
                             @endphp
                             @foreach ($reversedCart as $item)
-                                
-                       
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 ">{{$i++}}</h6>
+                                                <h6 class="mb-0 ">{{ $i++ }}</h6>
 
                                             </div>
                                         </div>
@@ -221,37 +225,42 @@
                                     </td>
                                     <td>
 
-                                     
 
-                                    
-                                           <input type="number"   style="width: 50px;border-style: none"  id="updateinput{{$index}}" value="{{ $item->quantity }}"/>
-                                   
-                                          <a class="btn bg-gradient-secondary btn-sm" style="margin: 0 auto"
-                                          onclick="testtwo('{{ $item->id }}','{{$index}}')"><i
-                                               class="fa fa-refresh"></i></a>
-                                     
+
+
+                                        <input type="number" style="width: 50px;border-style: none"
+                                            id="updateinput{{ $index }}" value="{{ $item->quantity }}" />
+
+                                        <a class="btn bg-gradient-secondary btn-sm" style="margin: 0 auto"
+                                            onclick="testtwo('{{ $item->id }}','{{ $index }}')"><i
+                                                class="fa fa-refresh"></i></a>
+
 
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-pill badge-lg bg-gradient-success text-1xl" >    <h5 class="mb-0 " style="color: white">{{ $item->price }}</h5></span>
+                                        <span class="badge badge-pill badge-lg bg-gradient-success text-1xl">
+                                            <h5 class="mb-0 " style="color: white">{{ $item->price }}</h5>
+                                        </span>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-pill badge-lg bg-gradient-success text-1xl" >    <h5 class="mb-0 " style="color: white">{{ $item->price * $item->quantity }}</h5></span>
+                                        <span class="badge badge-pill badge-lg bg-gradient-success text-1xl">
+                                            <h5 class="mb-0 " style="color: white">{{ $item->price * $item->quantity }}
+                                            </h5>
+                                        </span>
                                     </td>
-                                    
+
                                     <td class="align-middle">
 
                                         <a class="btn bg-gradient-danger btn-sm mt-3"
-                                           onclick="testone('{{ $item->id }}')"><i
-                                                class="fas fa-trash"></i></a>
+                                            onclick="testone('{{ $item->id }}')"><i class="fas fa-trash"></i></a>
 
                                     </td>
                                     <form action="{{ route('list') }}" method="post" id="formsub">
                                         @csrf
                                         <input type="hidden" name="id[]" value="{{ $item->id }}">
-                                        <input type="hidden"  name="product_id[]" value="{{ $item->id }}">
-                                        <input type="hidden"  name="listall[]" value="{{ $item->name }}">
+                                        <input type="hidden" name="product_id[]" value="{{ $item->id }}">
+                                        <input type="hidden" name="listall[]" value="{{ $item->name }}">
                                         <input type="hidden" name="quantity[]" value="{{ $item->quantity }}">
                                         <input type="hidden" name="price[]" value=" {{ $item->price }}">
 
@@ -260,9 +269,8 @@
 
 
                                 @php
-                                $index++;
+                                    $index++;
                                 @endphp
-                            
                             @endforeach
                         </tbody>
                     </table>
@@ -280,9 +288,9 @@
                             <input type="text" class="form-control" name="amount" id="num2"
                                 style="color: rgb(19, 23, 235)" placeholder="ยอดเงิน" onchange="calculate()">
                             @error('amount')
-                            <div class="my-2">
-                                <span class="text-danger my-2"> {{ $message }} </span>
-                            </div>
+                                <div class="my-2">
+                                    <span class="text-danger my-2"> {{ $message }} </span>
+                                </div>
                             @enderror
                         </div>
                     </div>
@@ -310,38 +318,55 @@
                             <label>
                                 <h4>รหัสผู้ค้างชำระ</h4>
                             </label>
-                            <input type="text" class="form-control"  list="browsers" name="debtors_id"
-                            style="color: rgb(19, 23, 235)" placeholder="รหัสผู้ค้างชำระ">
+                            <input type="text" class="form-control" list="browsers" name="debtors_id"
+                                style="color: rgb(19, 23, 235)" placeholder="รหัสผู้ค้างชำระ">
                             @error('debtors_id')
-                            <div class="my-2">
-                            <span class="text-danger my-2"> {{ $message }} </span>
-                             </div>
+                                <div class="my-2">
+                                    <span class="text-danger my-2"> {{ $message }} </span>
+                                </div>
                             @enderror
-                            
+
                             <datalist id="browsers">
-                                  @foreach ($deb as $item)
-                                      <option value="{{$item->id}}">{{$item->email}} {{$item->name}}</option>
-                                      @endforeach
+                                @foreach ($deb as $item)
+                                    <option value="{{ $item->id }}">{{ $item->email }} {{ $item->name }}</option>
+                                @endforeach
                             </datalist>
-                            {{-- <input type="text" class="form-control" name="debtors_id" id="inputkey"
-                                style="color: rgb(19, 23, 235)" placeholder="กรณีเลือกประเภทเป็นค้างชำระเท่านั้น" > --}}
-                                {{-- <div class="input-group input-group-static mb-4">
-                                   
-                                    <select class="form-control" id="exampleFormControlSelect1"  name="debtors_id"  style="color: rgb(19, 23, 235)">
-                                      <option value="" >กรณีเลือกประเภทเป็นค้างชำระเท่านั้น</option>
-                                      @foreach ($deb as $item)
-                                      <option value="{{$item->id}}">{{$item->email}}</option>
-                                      @endforeach
-                                     
-                                 
-                                    </select>
-                                  </div> --}}
-                                  
+
+
                         </div>
                     </div>
 
                 </div>
-                <input type="hidden" class="btn btn-success " name="total_price" id="num1" value=" {{ Cart::getTotal() }}">
+
+                <!-- fix -->
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-4">
+                            <label>
+                                <h4>กรณีพิเศษ</h4>
+                            </label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="fix"
+                                style="color: rgb(19, 23, 235)">
+                                <option value="0">ปกติ</option>
+                                <option value="1">โอนจ่ายแลกเงิน</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-4">
+                            <label>
+                                <h4>ยอดส่วนต่าง</h4>
+                            </label>
+                            <input type="text" class="form-control" name="fix_cost" style="color: rgb(19, 23, 235)"
+                                placeholder="ยอดเงิน">
+                        </div>
+                    </div>
+                </div>
+                <!-- fix -->
+
+                <input type="hidden" class="btn btn-success " name="total_price" id="num1"
+                    value=" {{ Cart::getTotal() }}">
                 <h4> ยอดรวม : <span
                         class="badge badge-pill badge-lg bg-gradient-success">{{ number_format(Cart::getTotal(), 2, '.', ',') }}</span>
                     บาท
@@ -349,29 +374,28 @@
 
                 <div class="row">
 
-                    <h4 > เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
+                    <h4> เงินทอน : <span class="badge badge-pill badge-lg bg-gradient-secondary">
                             <input class="form-control" style="color: rgb(255, 255, 255) ;font-size:1vw;width:120px"
                                 id="answer" name="change" readonly> </span>
                     </h4>
 
-                    
+
                     @error('change')
-                    <div class="my-2">
-                        <span class="text-danger my-2"> {{ $message }} </span>
-                    </div>
+                        <div class="my-2">
+                            <span class="text-danger my-2"> {{ $message }} </span>
+                        </div>
                     @enderror
                     <div class="col-6">
                         <button type="submit" class="btn btn-success " onclick="sendform()"
-                                style="margin-left: 5%;float: right;padding: 20px 24px;">ออกใบเสร็จ</button>
+                            style="margin-left: 5%;float: right;padding: 20px 24px;">ออกใบเสร็จ</button>
 
                     </div>
-                   
+
                     </form>
                     <div class="col-6">
                         <form action="{{ route('cart.clear') }}" method="POST">
                             @csrf
-                            <button class="btn btn-danger"
-                                style="padding: 20px 24px;">ล้างข้อมูลทั้งหมด</button>
+                            <button class="btn btn-danger" style="padding: 20px 24px;">ล้างข้อมูลทั้งหมด</button>
 
 
                         </form>
@@ -394,24 +418,12 @@
 
 
         <script>
-            
-            function printreceiptContent(el){
-                
-                // var data =
-                //     '<input type="button" id= "printPageButton" class="printPageButton" style="display: block; width:100%; border:none; background-color:#008B8B; color:#fff; padding:5px 10px; font-size:10px;cursor:pointer;text-align:center;" value="สั่งพิมพ์ใบเสร็จ" onClick="window.print()">';
-                // data += document.getElementById(el).innerHTML;
-                // myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
-                // myReceipt.screnX = 0;
-                // myReceipt.screnY = 0;
-                // myReceipt.document.write(data);
-                // myReceipt.document.title = "พิมพ์ใบเสร็จรับเงิน";
-                // myReceipt.document.window.print();
-                // myReceipt.focus();
+            function printreceiptContent(el) {
 
                 var data =
                     '';
                 data += document.getElementById(el).innerHTML;
-                myReceipt = window.open("","myWin","left=50,top=50,width=400,height=800");
+                myReceipt = window.open("", "myWin", "left=50,top=50,width=400,height=800");
                 myReceipt.screnX = 0;
                 myReceipt.screnY = 0;
                 myReceipt.document.write(data);
@@ -421,8 +433,6 @@
             }
         </script>
         <script>
-
-
             function calculate() {
 
                 var field1 = document.getElementById("num1").value;
@@ -451,16 +461,16 @@
                 })
             }
 
-            function testtwo(ele,index) {
+            function testtwo(ele, index) {
 
                 console.log(index)
-                var datainput = $('#updateinput'+index).val()
+                var datainput = $('#updateinput' + index).val()
                 let data = {
                     '_token': $('meta[name="csrf-token"]').attr('content'),
                     'id': ele,
-                    'quantity':datainput
+                    'quantity': datainput
                 }
-              
+
                 console.log(data)
                 $.ajax({
                     type: 'post',
@@ -468,10 +478,10 @@
                     data: data,
                     success: function() {
                         location.reload();
-                        
+
                     }
                 })
-               
+
             }
 
             function sendform() {

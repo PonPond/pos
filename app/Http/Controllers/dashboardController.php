@@ -68,9 +68,14 @@ class dashboardController extends Controller
     ->sum('amount');
 
     
+    $fix = DB::table('orders')
+    ->whereBetween('created_at', [$from, $to])
+    ->sum('fix_cost');
 
+    
+     
         
-        return view('page.dashboard.index1find',compact('orders','from','to','orders1','refund','payment','orders2'));
+        return view('page.dashboard.index1find',compact('orders','from','to','orders1','refund','payment','orders2','fix'));
     }
 
     

@@ -130,19 +130,19 @@
                 </table>
                 <h5 style="margin-left: 20px;color:red" >ยอดรวมจำนวน : {{$qty}}  ชิ้น</h5>
                 <h5 style="margin-left: 20px;color:red">ยอดขายรวมไม่หักค้างชำระ : {{$sum}}  บาท</h5>
-              
                 @foreach ($orders1 as $item)
                 <h5 style="margin-left: 20px;color:blue">{{$item->type_sale}} : {{$item->total}} บาท</h5>
                 @endforeach
-
                 <h5 style="margin-left: 20px">จ่ายยอดค้างชำระ : {{$payment}}  บาท</h5>
-
-
-                
                 <h5 style="margin-left: 20px">ยอดคืนของ : {{$refund}}  บาท</h5>
-
+                <h5 style="margin-left: 20px">ยอดโอนส่วนต่าง : {{$fix}}  บาท</h5>
                 <h3 style="margin-left: 20px;color:blue">ยอดขายรวมหลังการคำนวณทั้งหมด : {{$sum-$orders2+$payment}}  บาท</h5>
 
+                
+
+                <br><br>
+                
+               
             </div>
         </div>
 

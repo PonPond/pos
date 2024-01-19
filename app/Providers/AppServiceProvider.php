@@ -23,9 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-       $this->app->bind('path.public', function() {
-        return base_path().'/../public_html';
-    });
+        if (env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+            $this->app['url']->forceRootUrl(config('app.url'));
+        }
+    
+        if (config('app.env') !== 'local') {
+            $this->app['url']->forceScheme('https');
+        }
+        
+        if (config('app.debug') === false) {
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 }
