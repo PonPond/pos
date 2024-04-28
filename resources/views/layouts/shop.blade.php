@@ -37,7 +37,9 @@
     <style>
         * {
             font-family: 'Prompt', sans-serif;
-            font-weight: 500;
+            font-weight: 1000;
+
+
         }
     </style>
     <aside
@@ -76,24 +78,25 @@
 
 
                 @if (request()->routeIs('mo'))
-                <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-success " href="{{ route('mo') }}" target="_blank">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">shopping_cart</i>
-                        </div>
-                        <span class="nav-link-text ms-1">จอแสดงผลการขาย</span>
-                    </a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('mo') }}" target="_blank">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">shopping_cart</i>
-                        </div>
-                        <span class="nav-link-text ms-1">จอแสดงผลการขาย</span>
-                    </a>
-                </li>
-            @endif
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success " href="{{ route('mo') }}"
+                            target="_blank">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">shopping_cart</i>
+                            </div>
+                            <span class="nav-link-text ms-1">จอแสดงผลการขาย</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('mo') }}" target="_blank">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">shopping_cart</i>
+                            </div>
+                            <span class="nav-link-text ms-1">จอแสดงผลการขาย</span>
+                        </a>
+                    </li>
+                @endif
 
 
                 @if (request()->routeIs('shopP'))
@@ -117,70 +120,70 @@
                 @endif
 
                 @if (request()->routeIs('shopS'))
-                <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-success " href="{{ route('shopS') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">shopping_cart</i>
-                        </div>
-                        <span class="nav-link-text ms-1">ระบบขายส่ง</span>
-                    </a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('shopS') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">shopping_cart</i>
-                        </div>
-                        <span class="nav-link-text ms-1">ระบบขายส่ง</span>
-                    </a>
-                </li>
-            @endif
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success " href="{{ route('shopS') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">shopping_cart</i>
+                            </div>
+                            <span class="nav-link-text ms-1">ระบบขายส่ง</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('shopS') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">shopping_cart</i>
+                            </div>
+                            <span class="nav-link-text ms-1">ระบบขายส่ง</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">ประวัติการขาย
                     </h6>
                 </li>
 
                 @if (request()->routeIs('listindex'))
-                <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-success " href="{{ route('listindex') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">folder_open</i>
-                        </div>
-                        <span class="nav-link-text ms-1 " >ประวัติการขายปลีก</span>
-                    </a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('listindex') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">folder_open</i>
-                        </div>
-                        <span class="nav-link-text ms-1">ประวัติการขายปลีก</span>
-                    </a>
-                </li>
-            @endif
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success " href="{{ route('listindex') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">folder_open</i>
+                            </div>
+                            <span class="nav-link-text ms-1 ">ประวัติการขายปลีก</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('listindex') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">folder_open</i>
+                            </div>
+                            <span class="nav-link-text ms-1">ประวัติการขายปลีก</span>
+                        </a>
+                    </li>
+                @endif
 
-            @if (request()->routeIs('listindexs'))
-            <li class="nav-item">
-                <a class="nav-link text-white active bg-gradient-success " href="{{ route('listindexs') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">folder_open</i>
-                    </div>
-                    <span class="nav-link-text ms-1 " >ประวัติการขายส่ง</span>
-                </a>
-            </li>
-        @else
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{ route('listindexs') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">folder_open</i>
-                    </div>
-                    <span class="nav-link-text ms-1">ประวัติการขายส่ง</span>
-                </a>
-            </li>
-        @endif
-                
-            
+                @if (request()->routeIs('listindexs'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success " href="{{ route('listindexs') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">folder_open</i>
+                            </div>
+                            <span class="nav-link-text ms-1 ">ประวัติการขายส่ง</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('listindexs') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">folder_open</i>
+                            </div>
+                            <span class="nav-link-text ms-1">ประวัติการขายส่ง</span>
+                        </a>
+                    </li>
+                @endif
+
+
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดการสินค้า
                     </h6>
@@ -188,11 +191,12 @@
 
                 @if (request()->routeIs('product.index'))
                     <li class="nav-item">
-                        <a class="nav-link text-white active bg-gradient-success " href="{{ route('product.index') }}">
+                        <a class="nav-link text-white active bg-gradient-success "
+                            href="{{ route('product.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">add_shopping_cart</i>
                             </div>
-                            <span class="nav-link-text ms-1 " >สินค้า</span>
+                            <span class="nav-link-text ms-1 ">สินค้า</span>
                         </a>
                     </li>
                 @else
@@ -252,84 +256,88 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดการหนี้
                     </h6>
                 </li>
-                
-            @if (request()->routeIs('debtors.index'))
-                <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-success "
-                        href="{{ route('product.category') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <span class="nav-link-text ms-1">จัดการข้อมูลลูกหนี้</span>
-                    </a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('debtors.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <span class="nav-link-text ms-1">จัดการข้อมูลลูกหนี้</span>
-                    </a>
-                </li>
-            @endif
+
+                @if (request()->routeIs('debtors.index'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success "
+                            href="{{ route('product.category') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">group</i>
+                            </div>
+                            <span class="nav-link-text ms-1">จัดการข้อมูลลูกหนี้</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('debtors.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">group</i>
+                            </div>
+                            <span class="nav-link-text ms-1">จัดการข้อมูลลูกหนี้</span>
+                        </a>
+                    </li>
+                @endif
 
 
 
-            @if ( Auth::user()->role == 1 )
+                @if (Auth::user()->role == 1)
 
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">จัดพนักงานขาย
-                    </h6>
-                </li>
-                
-            @if (request()->routeIs('user.index'))
-                <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-success "
-                        href="{{ route('product.category') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <span class="nav-link-text ms-1">ข้อมูลพนักงานขาย</span>
-                    </a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('user.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <span class="nav-link-text ms-1">ข้อมูลพนักงานขาย</span>
-                    </a>
-                </li>
-            @endif
-            <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">สถิติ
-                    </h6>
-            </li>
-                
-            @if (request()->routeIs('dash1'))
-                <li class="nav-item">
-                    <a class="nav-link text-white active bg-gradient-success "
-                        href="{{ route('dash1') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <span class="nav-link-text ms-1">สถิติการขาย</span>
-                    </a>
-                </li>
-            @else
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('dash1') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <span class="nav-link-text ms-1">สถิติการขาย</span>
-                    </a>
-                </li>
-            @endif
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                            จัดพนักงานขาย
+                        </h6>
+                    </li>
 
-            @endif
+                    @if (request()->routeIs('user.index'))
+                        <li class="nav-item">
+                            <a class="nav-link text-white active bg-gradient-success "
+                                href="{{ route('product.category') }}">
+                                <div
+                                    class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">group</i>
+                                </div>
+                                <span class="nav-link-text ms-1">ข้อมูลพนักงานขาย</span>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{ route('user.index') }}">
+                                <div
+                                    class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">group</i>
+                                </div>
+                                <span class="nav-link-text ms-1">ข้อมูลพนักงานขาย</span>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">สถิติ
+                        </h6>
+                    </li>
+
+                    @if (request()->routeIs('dash1'))
+                        <li class="nav-item">
+                            <a class="nav-link text-white active bg-gradient-success " href="{{ route('dash1') }}">
+                                <div
+                                    class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">group</i>
+                                </div>
+                                <span class="nav-link-text ms-1">สถิติการขาย</span>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{ route('dash1') }}">
+                                <div
+                                    class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">group</i>
+                                </div>
+                                <span class="nav-link-text ms-1">สถิติการขาย</span>
+                            </a>
+                        </li>
+                    @endif
+
+                @endif
             </ul>
         </div>
         <div class="sidenav-footer position-absolute w-100 bottom-0 ">
@@ -337,7 +345,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a class=" btn bg-gradient-success mt-4 w-100 " href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
+                        onclick="event.preventDefault();
             this.closest('form').submit();">
                         ออกจากระบบ
                     </a>
