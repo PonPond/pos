@@ -104,13 +104,6 @@ Route::middleware([
 
       
 
-      
-        
-    
-     
-
-                
-
          
         return view('dashboard',compact('qty','category','debtors','price','dash1','dash1_1','summon'));
     })->name('dashboard');
@@ -130,10 +123,12 @@ Route::middleware([
     Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/menu_delete', [ProductController::class, 'indexs'])->name('product.menu_delete');
  
     Route::post('/product/store', [ProductController::class, 'store'])->name('product_store');
     Route::post('/product-update/{id}', [ProductController::class, 'update']);
     Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
+    Route::get('/product/return/{id}', [ProductController::class, 'return']);
 
 
 

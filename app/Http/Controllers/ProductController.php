@@ -18,6 +18,7 @@ class ProductController extends Controller
                 $data = DB::table('products')
                 ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->select('products.*', 'categories.name as category_name')
+                ->where('products.status', 'active')
                 ->orderByDesc('products.created_at');
                 // $data = DB::table('products')->orderByDesc('products.created_at');
                 
@@ -125,6 +126,60 @@ class ProductController extends Controller
 
     }
     
+    public function indexs(Request $request)
+    {
+        $typeCategory = Categories::all();
+       
+        if ($request->ajax()) {
+ 
+                $data = DB::table('products')
+                ->join('categories', 'products.category_id', '=', 'categories.id')
+                ->select('products.*', 'categories.name as category_name')
+                ->where('products.status', 'delete')
+                ->orderByDesc('products.created_at');
+                // $data = DB::table('products')->orderByDesc('products.created_at');
+                
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
+                    
+                        
+                    
+        
+                    $actionButtons = '<a href="' . url('/product/return/' . $data->id_product) . '" style="margin:1%;"
+                        class="btn btn-secondary btn-sm bg-gradient-success mb-3"
+                        onclick="return confirm(\'กู้คืนหรือไม่ ?\')">กู้คืนข้อมูล</a>';
+
+                   
+              
+        
+                
+                    return $actionButtons;
+                })
+                ->rawColumns(['action'])
+                ->filter(function ($query) use ($request) {
+                    if ($request->has('search') && !empty($request->search['value'])) {
+                        $searchValue = $request->search['value'];
+                        $searchTerms = explode(' ', $searchValue);
+                        
+                        $query->where(function($subquery) use ($searchTerms) {
+                            foreach ($searchTerms as $term) {
+                                $subquery->where(function($subquery) use ($term) {
+                                    $subquery->where('products.id_product', 'like', "%$term%")
+                                            ->orWhere('categories.name', 'like', "%$term%")
+                                             ->orWhere('products.name', 'like', "%$term%");
+                                });
+                            }
+                        });
+                    }
+                })
+                ->make(true);
+        }
+
+        return view('page.product.return_product', compact('typeCategory'));
+
+    }
+    
    
 
     public function store(Request $request)
@@ -192,15 +247,30 @@ class ProductController extends Controller
         // return redirect()->route('usermanager')->with('success',"อัพเดตข้อมูลเรียบร้อย");
     }
 
-    public function delete($id)
-    {
-        //ลบข้อมูล
+    // public function delete($id)
+    // {
+    //     //ลบข้อมูล
         
-        $delete = Product::where('id_product',$id)->delete();
+    //     $delete = Product::where('id_product',$id)->delete();
         
-        return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
+    //     return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
 
-    }
+    // }
+    public function delete($id)
+{
+    // เปลี่ยน status ของสินค้านั้นเป็น 'delete'
+    $update = Product::where('id_product', $id)->update(['status' => 'delete']);
+    
+    return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
+}
+
+public function return($id)
+{
+    // เปลี่ยน status ของสินค้านั้นเป็น 'delete'
+    $update = Product::where('id_product', $id)->update(['status' => 'active']);
+    
+    return redirect()->back()->with('return', "กู้คืนเรียบร้อยแล้ว");
+}
 
     public function fetchRecords(Request $request)
     {

@@ -209,6 +209,26 @@
                         </a>
                     </li>
                 @endif
+                @if (request()->routeIs('product.menu_delete'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white active bg-gradient-success "
+                            href="{{ route('product.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons">delete</i>
+                            </div>
+                            <span class="nav-link-text ms-1 ">สินค้าที่ถูกลบ</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="{{ route('product.menu_delete') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons">delete</i>
+                            </div>
+                            <span class="nav-link-text ms-1">สินค้าที่ถูกลบ</span>
+                        </a>
+                    </li>
+                @endif
 
                 @if (request()->routeIs('product.category'))
                     <li class="nav-item">
