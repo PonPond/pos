@@ -104,6 +104,13 @@ Route::middleware([
 
       
 
+      
+        
+    
+     
+
+                
+
          
         return view('dashboard',compact('qty','category','debtors','price','dash1','dash1_1','summon'));
     })->name('dashboard');
@@ -129,6 +136,7 @@ Route::middleware([
     Route::post('/product-update/{id}', [ProductController::class, 'update']);
     Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
     Route::get('/product/return/{id}', [ProductController::class, 'return']);
+    Route::delete('/products/delete-selected', [ProductController::class, 'deleteSelected'])->name('product.deleteSelected');
 
 
 

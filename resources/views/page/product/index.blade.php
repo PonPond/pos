@@ -108,6 +108,12 @@
             </div>
         @endif
 
+        @if (session('deleteSelected'))
+            <div class="alert alert-danger" role="alert">
+                <strong>สำเร็จ !</strong> ลบข้อมูลเรียบร้อย
+            </div>
+        @endif
+
     </div>
 
     <div class="col-lg-10">
@@ -120,7 +126,22 @@
                     href="https://27.254.144.129/phpMyAdmin/index.php?route=/sql&pos=0&db=admin_pos&table=products"
                     target="_blank" class="btn btn-primary" style="float: left;">ข้อมูลสินค้า</a>
 
+                <div align="right" class="col ">
+                    <button id="deleteAllSelected" class="btn btn-danger">Delete All Selected</button>
+                </div>
+                <!-- @if (session('delete'))
+    <div class="alert alert-danger" role="alert">
+                            <strong>สำเร็จ !</strong> ลบข้อมูลเรียบร้อย
+                        </div>
+    @endif -->
+
             </div>
+            <!-- <div class="row mb-3 col-12">
+                    <div class="col text-center">
+                        <button id="deleteAllSelected" class="btn btn-danger">Delete All Selected</button>
+                        <button id="addNewEmployee" class="btn btn-success">Add New Employee</button>
+                    </div>
+                </div> -->
             <div class="table-responsive">
 
                 <table class="table align-items-center mb-0" id="myTable">
@@ -129,6 +150,9 @@
                     </div>
                     <thead>
                         <tr>
+                            <th>
+                                <div align="center"><input type="checkbox" id="selectAll"></div>
+                            </th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">รหัสสินค้า</th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7">ประเภท</th>
                             <th class="text-uppercase text-secondary  text-1xl font-weight-bolder opacity-7 ps-2">ชื่อสินค้า
@@ -151,18 +175,28 @@
     @push('scripts')
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#myTable').DataTable({
+                var table = $('#myTable').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('product.index') }}",
                     columns: [{
+                            data: 'id_product',
+                            name: 'id_product',
+                            render: function(data, type, row) {
+                                return '<div align="center"><input type="checkbox" class="recordCheckbox " value="' +
+                                    data + '"></div>';
+                            },
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
                             data: 'id_product',
                             name: 'id_product'
                         },
                         {
                             data: 'category_name',
                             name: 'category_name'
-                        }, // New column for category name
+                        },
                         {
                             data: 'name',
                             name: 'name'
@@ -187,24 +221,64 @@
                         }
                     ],
                     deferRender: true,
-                    // Pagination with server-side processing
-                    serverSide: true,
-                    processing: true,
-                    "language": {
-                        "search": "<b>ค้นหา</b>",
-                        "zeroRecords": "ไม่พบข้อมูล - ขออภัย",
-                        "info": '',
-                        "infoEmpty": "ไม่มีข้อมูล",
-                        "infoFiltered": "",
-                        "lengthMenu": "   _MENU_ ",
-                        "paginate": {
-                            "previous": false,
-                            "next": false
+                    language: {
+                        search: "<b>ค้นหา</b>",
+                        zeroRecords: "ไม่พบข้อมูล - ขออภัย",
+                        info: '',
+                        infoEmpty: "ไม่มีข้อมูล",
+                        infoFiltered: "",
+                        lengthMenu: "   _MENU_ ",
+                        paginate: {
+                            previous: false,
+                            next: false
                         }
                     }
                 });
 
+                $('#selectAll').on('click', function() {
+                    var rows = table.rows({
+                        'search': 'applied'
+                    }).nodes();
+                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                });
 
+                $('#myTable tbody').on('change', 'input[type="checkbox"]', function() {
+                    if (!this.checked) {
+                        var el = $('#selectAll').get(0);
+                        if (el && el.checked && ('indeterminate' in el)) {
+                            el.indeterminate = true;
+                        }
+                    }
+                });
+
+                $('#deleteAllSelected').on('click', function() {
+                    var ids = [];
+                    $('.recordCheckbox:checked').each(function() {
+                        ids.push($(this).val());
+                    });
+
+                    if (ids.length > 0) {
+                        if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบรายการที่เลือก?')) {
+                            $.ajax({
+                                url: "{{ route('product.deleteSelected') }}",
+                                type: 'DELETE',
+                                data: {
+                                    ids: ids,
+                                    _token: '{{ csrf_token() }}'
+                                },
+                                success: function(response) {
+                                    table.ajax.reload();
+                                    // alert('ลบรายการที่เลือกเรียบร้อยแล้ว');
+                                },
+                                error: function(response) {
+                                    alert('เกิดข้อผิดพลาดในการลบรายการที่เลือก');
+                                }
+                            });
+                        }
+                    } else {
+                        alert('กรุณาเลือกรายการอย่างน้อยหนึ่งรายการเพื่อลบ');
+                    }
+                });
             });
         </script>
     @endpush

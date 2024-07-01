@@ -263,6 +263,13 @@ class ProductController extends Controller
     
     return redirect()->back()->with('delete', "ลบเรียบร้อยแล้ว");
 }
+public function deleteSelected(Request $request)
+{
+        $ids = $request->ids;
+        Product::whereIn('id_product', $ids)->update(['status' => 'delete']);
+
+        return response()->json(['success' => "ลบเรียบร้อยแล้ว"]);
+}
 
 public function return($id)
 {
