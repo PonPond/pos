@@ -131,17 +131,17 @@
                 </div>
                 <!-- @if (session('delete'))
     <div class="alert alert-danger" role="alert">
-                            <strong>สำเร็จ !</strong> ลบข้อมูลเรียบร้อย
-                        </div>
+                                                            <strong>สำเร็จ !</strong> ลบข้อมูลเรียบร้อย
+                                                        </div>
     @endif -->
 
             </div>
             <!-- <div class="row mb-3 col-12">
-                    <div class="col text-center">
-                        <button id="deleteAllSelected" class="btn btn-danger">Delete All Selected</button>
-                        <button id="addNewEmployee" class="btn btn-success">Add New Employee</button>
-                    </div>
-                </div> -->
+                                                    <div class="col text-center">
+                                                        <button id="deleteAllSelected" class="btn btn-danger">Delete All Selected</button>
+                                                        <button id="addNewEmployee" class="btn btn-success">Add New Employee</button>
+                                                    </div>
+                                                </div> -->
             <div class="table-responsive">
 
                 <table class="table align-items-center mb-0" id="myTable">
@@ -256,24 +256,28 @@
                     $('.recordCheckbox:checked').each(function() {
                         ids.push($(this).val());
                     });
-
+                    var userRole = {{ $userRole }};
                     if (ids.length > 0) {
-                        if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบรายการที่เลือก?')) {
-                            $.ajax({
-                                url: "{{ route('product.deleteSelected') }}",
-                                type: 'DELETE',
-                                data: {
-                                    ids: ids,
-                                    _token: '{{ csrf_token() }}'
-                                },
-                                success: function(response) {
-                                    table.ajax.reload();
-                                    // alert('ลบรายการที่เลือกเรียบร้อยแล้ว');
-                                },
-                                error: function(response) {
-                                    alert('เกิดข้อผิดพลาดในการลบรายการที่เลือก');
-                                }
-                            });
+                        if (userRole == 1) {
+                            if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบรายการที่เลือก?')) {
+                                $.ajax({
+                                    url: "{{ route('product.deleteSelected') }}",
+                                    type: 'DELETE',
+                                    data: {
+                                        ids: ids,
+                                        _token: '{{ csrf_token() }}'
+                                    },
+                                    success: function(response) {
+                                        table.ajax.reload();
+                                        // alert('ลบรายการที่เลือกเรียบร้อยแล้ว');
+                                    },
+                                    error: function(response) {
+                                        alert('เกิดข้อผิดพลาดในการลบรายการที่เลือก');
+                                    }
+                                });
+                            }
+                        } else {
+                            alert('คุณไม่มีสิทธิ์ในการลบรายการที่เลือก');
                         }
                     } else {
                         alert('กรุณาเลือกรายการอย่างน้อยหนึ่งรายการเพื่อลบ');
