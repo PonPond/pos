@@ -77,7 +77,7 @@
 
                                             <button type="button" class="btn btn-outline-info"
                                                 onclick="printreceiptContent('print')">
-                                                <i class="fas fa-print"></i>
+                                                พิมพ์
                                             </button>
                                             <div class="modal">
                                                 <div id="print">
@@ -279,8 +279,7 @@
                                             id="updateinput{{ $index }}" value="{{ $item->quantity }}" />
 
                                         <a class="btn bg-gradient-secondary btn-sm" style="margin: 0 auto"
-                                            onclick="testtwo('{{ $item->id }}','{{ $index }}')"><i
-                                                class="fa fa-refresh"></i></a>
+                                            onclick="testtwo('{{ $item->id }}','{{ $index }}')">รีเฟรช</a>
 
 
                                     </td>
@@ -300,7 +299,7 @@
                                     <td class="align-middle">
 
                                         <a class="btn bg-gradient-danger btn-sm mt-3"
-                                            onclick="testone('{{ $item->id }}')"><i class="fas fa-trash"></i></a>
+                                            onclick="testone('{{ $item->id }}')">ลบ</a>
 
                                     </td>
                                     <form action="{{ route('list') }}" method="post" id="formsub">

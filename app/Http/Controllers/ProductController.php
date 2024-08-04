@@ -154,7 +154,7 @@ class ProductController extends Controller
             ->addColumn('action', function ($data) use ($userRole) {
                 $actionButtons = '<button type="button" style="margin: 0%;" class="btn btn-secondary btn-sm bg-gradient-secondary mb-3"
                     data-bs-toggle="modal" data-bs-target="#modal-default' . $data->id_product . '">
-                    <i class="far fa-edit"></i></button> ';
+                    แก้ไข</button> ';
 
                 $actionButtons .= '<a href="' . url('/barcode/' . $data->id_product) . '" style="margin: 0%;" target="_blank"
                     class="btn btn-secondary btn-sm bg-gradient-secondary mb-3"
